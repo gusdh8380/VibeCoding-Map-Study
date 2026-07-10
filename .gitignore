@@ -1,0 +1,9 @@
+# OMC orchestration state (ephemeral, session-specific) — matches root and vibemap/.omc
+.omc/
+
+# Local Claude Code settings (machine-specific permissions)
+.claude/settings.local.json
+
+# macOS
+.DS_Store
+**/.DS_Store
