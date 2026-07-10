@@ -50,3 +50,12 @@ Invariants when running the tutor:
 - Teach from `vibemap/docs/nodes.json` `body.ko` — **never invent concept content.** Use `data.js` edges for prerequisites/connections.
 - `vibemap/` is strictly read-only. Writes go only to `tutor/PROGRESS.md`. If concept content looks wrong, tell the user — fixing it belongs to vibemap's authoring workflow (`raw/nodes/*.md`), not the tutor.
 - Mastery (✅) = passes Feynman explain-back AND quiz ≥ 80%.
+
+### 도구 간 연속성 (Codex ↔ Claude Code)
+
+이 튜터는 **Claude Code와 Codex CLI**(`AGENTS.md` 참조)에서 모두 동작하며, 유일한 공유 상태는 **`tutor/PROGRESS.md`** 하나다. 학생이 도구를 바꿔가며 공부해도 진도가 끊기지 않게 하려면:
+
+- **세션 시작 시 반드시 `tutor/PROGRESS.md`를 다시 읽는다** — 직전 세션이 다른 도구(Codex)에서 진행됐을 수 있다. 메모리나 이전 대화가 아니라 이 파일이 진실의 원천이다.
+- **세션 종료 시 반드시 `tutor/PROGRESS.md`를 저장한다** (상태·SRS·세션 카운터·현재 위치·로그). 저장 전 세션이 끊기면 그 세션분은 유실된다. 세션이 길어지면 중간에도 체크포인트로 저장한다.
+- 넘어가는 것은 **진도 상태**(어디까지·무엇을 복습)이지 한 채팅 안의 대화 문장이 아니다 — 설계상 이것으로 충분하다.
+- **두 도구를 동시에 돌리지 않는다** (같은 파일 쓰기 충돌 방지). 다른 PC에서 이어서 하면 `git pull`/`push`로 `tutor/PROGRESS.md`를 동기화한다.
